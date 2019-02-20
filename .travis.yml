@@ -1,0 +1,17 @@
+language: java
+jdk: openjdk11
+cache:
+  directories:
+  - "$HOME/.m2/repository"
+services: mongodb
+#before_install:
+#  - pip install --user codecov    #Install codecov
+  -
+after_success:
+#  - codecov
+  - bash <(curl -s https://codecov.io/bash)
+#  - bash <(curl -s https://codecov.io/bash) -t 73275810-fabf-48f1-b7ee-201f216557b1
+#  - export CODECOV_TOKEN="73275810-fabf-48f1-b7ee-201f216557b1"
+#  - bash <(curl -s https://codecov.io/bash)
+#  - echo "73275810-fabf-48f1-b7ee-201f216557b1" > .cc_token
+#  - bash <(curl -s https://codecov.io/bash) -t @.cc_token
