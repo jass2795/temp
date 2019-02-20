@@ -85,21 +85,15 @@ public class FeedDataApplicationListener implements ApplicationListener<ContextR
     {
         File file = new File("../ibm-wave3-quizify/question-manager-service/assets/MoviesBasicAll.xlsx");
         System.out.println("-----------------------------------------------------------------------"+file.exists());
-        try {
-            XSSFWorkbook myWorkBook = new XSSFWorkbook(new FileInputStream(file));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
         try
         {
             // Finds the XLSX file
-           Resource resource = new ClassPathResource("data/MoviesBasicAll.xlsx");
-
+//           Resource resource = new ClassPathResource("data/MoviesBasicAll.xlsx");
 
             // Finds the workbook instance for XLSX file
 
-            XSSFWorkbook myWorkBook = new XSSFWorkbook(new FileInputStream(resource.getFile()));
+            XSSFWorkbook myWorkBook = new XSSFWorkbook(new FileInputStream(file));
             // Return first sheet from the XLSX workbook
             XSSFSheet mySheet = myWorkBook.getSheetAt(0);
             // Get iterator to all the rows in current sheet
