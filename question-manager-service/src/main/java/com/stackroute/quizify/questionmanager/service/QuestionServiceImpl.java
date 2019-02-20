@@ -41,7 +41,7 @@ public class QuestionServiceImpl implements QuestionService {
         if (this.questionRepository.existsById(question.getId()))
             throw new QuestionAlreadyExistsException("Question Already Exists!");
         else {
-            kafkaProducerConfig.kafkaTemplate().send("questions",question);
+            //kafkaProducerConfig.kafkaTemplate().send("questions",question);
             return this.questionRepository.save(question);
         }
 

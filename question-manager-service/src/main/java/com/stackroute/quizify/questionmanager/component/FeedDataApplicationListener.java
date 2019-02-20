@@ -28,6 +28,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import static java.lang.ProcessBuilder.Redirect.appendTo;
+
 @Component
 public class FeedDataApplicationListener implements ApplicationListener<ContextRefreshedEvent>
 {
@@ -83,8 +85,9 @@ public class FeedDataApplicationListener implements ApplicationListener<ContextR
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event)
     {
-        File file = new File("../ibm-wave3-quizify/question-manager-service/assets/MoviesBasicAll.xlsx");
+        File file = new File("./assets/MoviesBasicAll.xlsx");
         System.out.println("-----------------------------------------------------------------------"+file.exists());
+
 
         try
         {
