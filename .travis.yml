@@ -30,8 +30,10 @@ after_success:
   - sleep 5
   - bin/zookeeper-server-stop.sh
   - sleep 5
+  - bin/kafka-topics.sh --delete --topic questions --zookeeper localhost:2181
   - cd ../
   - rm -rf kafka
+  - ls
   - export CODECOV_TOKEN="a5a0d1ea-f898-47a5-995a-96325469845d"
   - bash <(curl -s https://codecov.io/bash)
 

@@ -115,6 +115,7 @@ public class FeedDataApplicationListener implements ApplicationListener<ContextR
                 for (int i=1; cellIterator.hasNext(); i++)
                 {
                     cell = cellIterator.next();
+                    String cellType = "" + cell.getCellType();
                     switch (i)
                     {
                         case 3:
@@ -131,21 +132,22 @@ public class FeedDataApplicationListener implements ApplicationListener<ContextR
                         case 7:
                             this.question.setStatement(cell.getStringCellValue());
                         case 8:
-                        {
                             options = new ArrayList<>();
-                        }
                         case 9:
                         case 10:
-                            options.add(cell.getStringCellValue());
-                            break;
                         case 11:
-                        {
-                            options.add(cell.getStringCellValue());
-                            this.question.setOptions(options);
-                        }
-                        break;
+                            if (cellType.equals("NUMERIC"))
+                                options.add(""+cell.getNumericCellValue());
+                            else
+                                options.add(cell.getStringCellValue());
+                            if (i==11)
+                                this.question.setOptions(options);
+                            break;
                         case 12:
-                            this.question.setAnswer(cell.getStringCellValue());
+                            if (cellType.equals("NUMERIC"))
+                                this.question.setAnswer(""+cell.getNumericCellValue());
+                            else
+                                this.question.setAnswer(cell.getStringCellValue());
                             break;
                     }
 
