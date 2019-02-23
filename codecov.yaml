@@ -5,22 +5,22 @@ codecov:
 coverage:
   precision: 2
   round: down
-  range: "20...100"
+  range: "70...100"
 
   status:
     project: yes
     patch: yes
-    changes: yes
+    changes: no
 
 parsers:
   gcov:
     branch_detection:
       conditional: yes
       loop: yes
-      method: yes
-      macro: yes
+      method: no
+      macro: no
 
 comment:
   layout: "header, diff"
   behavior: default
-  require_changes: yes
+  require_changes: no
