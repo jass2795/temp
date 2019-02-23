@@ -5,8 +5,13 @@ import com.stackroute.quizify.questionmanager.domain.Question;
 import com.stackroute.quizify.questionmanager.exception.NoQuestionFoundException;
 import com.stackroute.quizify.questionmanager.exception.QuestionAlreadyExistsException;
 import com.stackroute.quizify.questionmanager.exception.QuestionDoesNotExistException;
+import com.stackroute.quizify.questionmanager.kafka.Producer;
 import com.stackroute.quizify.questionmanager.repository.QuestionRepository;
+import org.apache.kafka.clients.producer.KafkaProducer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -21,14 +26,15 @@ import java.util.List;
 
 @Service
 public class QuestionServiceImpl implements QuestionService {
-    @Autowired
-    KafkaProducerConfig kafkaProducerConfig;
 
     private QuestionRepository questionRepository;
+    private Producer producer;
 
     @Autowired
-    public QuestionServiceImpl(QuestionRepository questionRepository) {
+    public QuestionServiceImpl(QuestionRepository questionRepository, Producer producer)
+    {
         this.questionRepository = questionRepository;
+        this.producer = producer;
     }
 
 
@@ -41,8 +47,12 @@ public class QuestionServiceImpl implements QuestionService {
         if (this.questionRepository.existsById(question.getId()))
             throw new QuestionAlreadyExistsException("Question Already Exists!");
         else {
-            //kafkaProducerConfig.kafkaTemplate().send("questions",question);
-            return this.questionRepository.save(question);
+            if(this.questionRepository.findTopByOrderByIdDesc().isEmpty())
+                question.setId(1);
+            else
+                question.setId(this.questionRepository.findTopByOrderByIdDesc().get().getId()+1);
+            return producer.send(this.questionRepository.save(question));
+//            return this.questionRepository.save(question);
         }
 
 
@@ -54,8 +64,10 @@ public class QuestionServiceImpl implements QuestionService {
     */
     @Override
     public Question updateQuestion(Question question) throws QuestionDoesNotExistException {
-        if (this.questionRepository.existsById(question.getId()))
-            return this.questionRepository.save(question);
+        if (this.questionRepository.existsById(question.getId())) {
+            return producer.send(this.questionRepository.save(question));
+//            return this.questionRepository.save(question);
+        }
         else
             throw new QuestionDoesNotExistException("Question Does Not Exist!");
 
@@ -215,5 +227,6 @@ public class QuestionServiceImpl implements QuestionService {
             result.add(numbers.get(i));
         return result;
     }
+
 
 }

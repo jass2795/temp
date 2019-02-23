@@ -30,6 +30,7 @@ import java.util.List;
 @Data
 public class Topic {
     @Id
+    private long id;
     private String name;
     private String imageUrl;
     private String timeStamp;

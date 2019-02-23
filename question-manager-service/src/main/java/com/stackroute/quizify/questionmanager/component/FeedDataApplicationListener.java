@@ -5,19 +5,14 @@ import com.stackroute.quizify.questionmanager.domain.Category;
 import com.stackroute.quizify.questionmanager.domain.Question;
 import com.stackroute.quizify.questionmanager.domain.Topic;
 import com.stackroute.quizify.questionmanager.exception.QuestionAlreadyExistsException;
-import com.stackroute.quizify.questionmanager.repository.QuestionRepository;
 import com.stackroute.quizify.questionmanager.service.QuestionService;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
@@ -46,13 +41,14 @@ public class FeedDataApplicationListener implements ApplicationListener<ContextR
          * Dummy Data For Admin Class
          */
         this.admin = new Admin();
-        this.admin.setId("101");
+        this.admin.setId(101L);
         this.admin.setName("Kaustav");
 
         /**
          * Dummy Data For Category Class
          */
         this.category = new Category();
+        this.category.setId(202L);
         this.category.setName("Entertainment");
         this.category.setImageUrl("https://www.gudstory.com/wp-content/uploads/2018/10/Entertainment-1.jpg");
         this.category.setTimeStamp(""+System.currentTimeMillis());
@@ -61,6 +57,7 @@ public class FeedDataApplicationListener implements ApplicationListener<ContextR
          * Dummy Data For Topic Class
          */
         this.topic = new Topic();
+        this.topic.setId(303L);
         this.topic.setName("Movies");
         this.topic.setImageUrl("https://boygeniusreport.files.wordpress.com/2016/03/movies-tiles.jpg?quality=98&strip=all");
         this.topic.setTimeStamp(""+System.currentTimeMillis());
@@ -69,7 +66,6 @@ public class FeedDataApplicationListener implements ApplicationListener<ContextR
          * Dummy Data For Question Class
          */
         this.question = new Question();
-
         this.question.setCategory(this.category);
         this.question.setTopic(this.topic);
         this.question.setAdmin(this.admin);
@@ -86,7 +82,7 @@ public class FeedDataApplicationListener implements ApplicationListener<ContextR
     public void onApplicationEvent(ContextRefreshedEvent event)
     {
         File file = new File("./assets/MoviesBasicAll.xlsx");
-        System.out.println("-----------------------------------------------------------------------"+file.exists());
+//        System.out.println("-----------------------------------------------------------------------"+file.exists());
 
 
         try
@@ -103,14 +99,19 @@ public class FeedDataApplicationListener implements ApplicationListener<ContextR
             Iterator<Row> rowIterator = mySheet.iterator();
             // Traversing over each row of XLSX file
             rowIterator.next();//Skipping 1st line
+            int j=0;
             while (rowIterator.hasNext()) {
+//                System.out.println();
+//                System.out.println("Running : ");
+//                System.out.println(++j);
+//                System.out.println();
                 Row row = rowIterator.next();
-                this.question.setId("Q_" + System.currentTimeMillis());
 
                 // For each row, iterate through each columns
                 Iterator<Cell> cellIterator = row.cellIterator();
                 Cell cell;
                 List<String> options = null;
+                question.setId(0);
                 for (int i=1; cellIterator.hasNext(); i++)
                 {
                     cell = cellIterator.next();
@@ -150,6 +151,9 @@ public class FeedDataApplicationListener implements ApplicationListener<ContextR
 
                 }
                 this.question.setTimeStamp(""+System.currentTimeMillis());
+//                System.out.println("******************************************************************************");
+//                System.out.println("Produced : ");
+//                System.out.println(this.question);
                 this.questionService.addNewQuestion(this.question);
             }
         }

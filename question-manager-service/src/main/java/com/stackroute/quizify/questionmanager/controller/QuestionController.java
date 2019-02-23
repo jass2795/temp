@@ -102,20 +102,20 @@ public class QuestionController {
 
 
     @ApiOperation(value = "Get Questions By Topic")
-    @GetMapping("/questions/topic/{topic}/{numberOfQuestions}")
-    public ResponseEntity<?> getQuestionsByTopic(@PathVariable String topic, @PathVariable int numberOfQuestions) {
+    @GetMapping("/questions/topic/{topicName}/{numberOfQuestions}")
+    public ResponseEntity<?> getQuestionsByTopic(@PathVariable String topicName, @PathVariable int numberOfQuestions) {
         try {
-            return new ResponseEntity<List<Question>>(this.questionService.getQuestionsByTopic(topic, numberOfQuestions), HttpStatus.OK);
+            return new ResponseEntity<List<Question>>(this.questionService.getQuestionsByTopic(topicName, numberOfQuestions), HttpStatus.OK);
         } catch (NoQuestionFoundException e) {
             return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
     }
 
     @ApiOperation(value = "Get All Questions By Topic")
-    @GetMapping("/questions/topic/{topic}")
-    public ResponseEntity<?> getAllQuestionsByTopic(@PathVariable String topic) {
+    @GetMapping("/questions/topic/{topicName}")
+    public ResponseEntity<?> getAllQuestionsByTopic(@PathVariable String topicName) {
         try {
-            return new ResponseEntity<List<Question>>(this.questionService.getAllQuestionsByTopic(topic), HttpStatus.OK);
+            return new ResponseEntity<List<Question>>(this.questionService.getAllQuestionsByTopic(topicName), HttpStatus.OK);
         } catch (NoQuestionFoundException e) {
             return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
         }

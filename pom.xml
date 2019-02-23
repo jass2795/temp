@@ -29,7 +29,8 @@
         <module>eureka-server</module>
         <module>zuul-gatewayservice</module>
         <module>config-server</module>
-	<module>question-manager-service</module>
+	    <module>question-manager-service</module>
+        <module>game-manager</module>
     </modules>
     <dependencies>
         <dependency>

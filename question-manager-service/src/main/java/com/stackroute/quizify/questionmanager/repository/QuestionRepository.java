@@ -6,6 +6,7 @@ import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 /*
  * This "QuestionRepository" interface is used for CRUD operations in MongoDB.
@@ -30,22 +31,28 @@ import java.util.List;
 @Repository
 public interface QuestionRepository extends MongoRepository<Question, String> {
 
-    @Query("{ 'tag': '?0', 'level': '?1' }")
+    Optional<Question> findTopByOrderByIdDesc();
+
+    Optional<Question> findById(long id);
+
+    boolean existsById(long id);
+
+    @Query("{ 'tag': { $regex: '?0', $options: 'i'}, 'level': '?1' }")
     List<Question> getQuestionsByTagByLevel(String tag, String level);
 
-    @Query("{ 'tag': '?0' }")
+    @Query("{ 'tag': { $regex: '?0', $options: 'i'} }")
     List<Question> getQuestionsByTag(String tag);
 
-    @Query("{ 'topic._id': '?0' , 'level': '?1' }")
+    @Query("{ 'topic.name': { $regex: '?0', $options: 'i'} , 'level': '?1' }")
     List<Question> getQuestionsByTopicByLevel(String topicName, String level);
 
-    @Query("{ 'topic._id': '?0' }")
+    @Query("{ 'topic.name': { $regex: '?0', $options: 'i'} }")
     List<Question> getQuestionsByTopic(String topicName);
 
-    @Query("{ 'genre': '?0', 'level': '?1' }")
+    @Query("{ 'genre': { $regex: '?0', $options: 'i'}, 'level': '?1' }")
     List<Question> getQuestionsByGenreByLevel(String genre, String level);
 
-    @Query("{ genre: '?0' }")
+    @Query("{ genre: { $regex: '?0', $options: 'i'} }")
     List<Question> getQuestionsByGenre(String genre);
 
 //    @Query("{ 'category._id': '?0', 'level': '?1' }")

@@ -104,6 +104,7 @@ services:
     restart: always
     network_mode: host
     depends_on:
+      - zookeeper
       - kafka
       - mongo
       - eurekaserver
@@ -114,7 +115,22 @@ services:
     expose:
       - 8001
 
-
+  game-manager-service:
+    image: game-manager
+    build: game-manager/
+    restart: always
+    network_mode: host
+    depends_on:
+      - zookeeper
+      - kafka
+      - mongo
+      - eurekaserver
+      - configserver
+      - apigateway
+    ports:
+      - 8102:8102
+    expose:
+      - 8102
 
 #  quizify-front-end:
 #    image: quizify-front-end
