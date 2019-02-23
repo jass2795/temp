@@ -81,86 +81,86 @@ public class FeedDataApplicationListener implements ApplicationListener<ContextR
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event)
     {
-//        File file = new File("./assets/MoviesBasicAll.xlsx");
+        File file = new File("./assets/MoviesBasicAll.xlsx");
 //        System.out.println("-----------------------------------------------------------------------"+file.exists());
 
 
-//        try
-//        {
-//            // Finds the XLSX file
-////           Resource resource = new ClassPathResource("data/MoviesBasicAll.xlsx");
-//
-//            // Finds the workbook instance for XLSX file
-//
-//            XSSFWorkbook myWorkBook = new XSSFWorkbook(new FileInputStream(file));
-//            // Return first sheet from the XLSX workbook
-//            XSSFSheet mySheet = myWorkBook.getSheetAt(0);
-//            // Get iterator to all the rows in current sheet
-//            Iterator<Row> rowIterator = mySheet.iterator();
-//            // Traversing over each row of XLSX file
-//            rowIterator.next();//Skipping 1st line
-//            int j=0;
-//            while (rowIterator.hasNext()) {
-////                System.out.println();
-////                System.out.println("Running : ");
-////                System.out.println(++j);
-////                System.out.println();
-//                Row row = rowIterator.next();
-//
-//                // For each row, iterate through each columns
-//                Iterator<Cell> cellIterator = row.cellIterator();
-//                Cell cell;
-//                List<String> options = null;
-//                question.setId(0);
-//                for (int i=1; cellIterator.hasNext(); i++)
-//                {
-//                    cell = cellIterator.next();
-//                    switch (i)
-//                    {
-//                        case 3:
-//                            this.question.setTag(cell.getStringCellValue());
-//                            break;
-//                        case 4:
-//                            this.question.setGenre(cell.getStringCellValue());
-//                            break;
-//                        case 5:
-//                            this.question.setLevel(cell.getStringCellValue());
-//                            break;
-//                        case 6:
-//                            this.question.setType(cell.getStringCellValue());
-//                        case 7:
-//                            this.question.setStatement(cell.getStringCellValue());
-//                        case 8:
-//                        {
-//                            options = new ArrayList<>();
-//                        }
-//                        case 9:
-//                        case 10:
-//                            options.add(cell.getStringCellValue());
-//                            break;
-//                        case 11:
-//                        {
-//                            options.add(cell.getStringCellValue());
-//                            this.question.setOptions(options);
-//                        }
-//                        break;
-//                        case 12:
-//                            this.question.setAnswer(cell.getStringCellValue());
-//                            break;
-//                    }
-//
-//                }
-//                this.question.setTimeStamp(""+System.currentTimeMillis());
-////                System.out.println("******************************************************************************");
-////                System.out.println("Produced : ");
-////                System.out.println(this.question);
-//                this.questionService.addNewQuestion(this.question);
-//            }
-//        }
-//        catch (IOException | QuestionAlreadyExistsException e)
-//        {
-//            e.printStackTrace();
-//        }
+        try
+        {
+            // Finds the XLSX file
+//           Resource resource = new ClassPathResource("data/MoviesBasicAll.xlsx");
+
+            // Finds the workbook instance for XLSX file
+
+            XSSFWorkbook myWorkBook = new XSSFWorkbook(new FileInputStream(file));
+            // Return first sheet from the XLSX workbook
+            XSSFSheet mySheet = myWorkBook.getSheetAt(0);
+            // Get iterator to all the rows in current sheet
+            Iterator<Row> rowIterator = mySheet.iterator();
+            // Traversing over each row of XLSX file
+            rowIterator.next();//Skipping 1st line
+            int j=0;
+            while (rowIterator.hasNext()) {
+//                System.out.println();
+//                System.out.println("Running : ");
+//                System.out.println(++j);
+//                System.out.println();
+                Row row = rowIterator.next();
+
+                // For each row, iterate through each columns
+                Iterator<Cell> cellIterator = row.cellIterator();
+                Cell cell;
+                List<String> options = null;
+                question.setId(0);
+                for (int i=1; cellIterator.hasNext(); i++)
+                {
+                    cell = cellIterator.next();
+                    switch (i)
+                    {
+                        case 3:
+                            this.question.setTag(cell.getStringCellValue());
+                            break;
+                        case 4:
+                            this.question.setGenre(cell.getStringCellValue());
+                            break;
+                        case 5:
+                            this.question.setLevel(cell.getStringCellValue());
+                            break;
+                        case 6:
+                            this.question.setType(cell.getStringCellValue());
+                        case 7:
+                            this.question.setStatement(cell.getStringCellValue());
+                        case 8:
+                        {
+                            options = new ArrayList<>();
+                        }
+                        case 9:
+                        case 10:
+                            options.add(cell.getStringCellValue());
+                            break;
+                        case 11:
+                        {
+                            options.add(cell.getStringCellValue());
+                            this.question.setOptions(options);
+                        }
+                        break;
+                        case 12:
+                            this.question.setAnswer(cell.getStringCellValue());
+                            break;
+                    }
+
+                }
+                this.question.setTimeStamp(""+System.currentTimeMillis());
+//                System.out.println("******************************************************************************");
+//                System.out.println("Produced : ");
+//                System.out.println(this.question);
+                this.questionService.addNewQuestion(this.question);
+            }
+        }
+        catch (IOException | QuestionAlreadyExistsException e)
+        {
+            e.printStackTrace();
+        }
 
 //        File file = new File("./assets/MoviesBasicAll.csv");
 
