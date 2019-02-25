@@ -1,6 +1,16 @@
 version: "2"
 
 services:
+  mysql:
+    image: mysql:5.7
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=Root@123
+      - MYSQL_DATABASE=loginDB
+    container_name: mysql
+    network_mode: host
+    hostname: 0.0.0.0
 
   mongo:
     image: mongo:3.4-jessie
@@ -148,6 +158,40 @@ services:
       - 8106:8106
     expose:
       - 8106
+
+  user-registration-service:
+    image: user-registration-service
+    build: user-registration-service/
+    restart: always
+    network_mode: host
+    depends_on:
+      - zookeeper
+      - kafka
+      - mongo
+      - eurekaserver
+      - configserver
+      - apigateway
+    ports:
+      - 8999:8999
+    expose:
+      - 8999
+
+  user-authentication-service:
+    image: user-authentication-service
+    build: user-authentication-service/
+    restart: always
+    network_mode: host
+    depends_on:
+      - zookeeper
+      - kafka
+      - mysql
+      - eurekaserver
+      - configserver
+      - apigateway
+    ports:
+      - 8095:8095
+    expose:
+      - 8095
 
 #  quizify-front-end:
 #    image: quizify-front-end

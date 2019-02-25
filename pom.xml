@@ -33,6 +33,7 @@
         <module>game-manager-service</module>
         <module>search-service</module>
         <module>user-registration-service</module>
+        <module>user-authentication-service</module>
     </modules>
     <dependencies>
         <dependency>
