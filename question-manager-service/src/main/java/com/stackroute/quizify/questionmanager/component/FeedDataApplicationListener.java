@@ -1,9 +1,9 @@
 package com.stackroute.quizify.questionmanager.component;
 
-import com.stackroute.quizify.questionmanager.domain.Admin;
-import com.stackroute.quizify.questionmanager.domain.Category;
-import com.stackroute.quizify.questionmanager.domain.Question;
-import com.stackroute.quizify.questionmanager.domain.Topic;
+import com.stackroute.quizify.kafka.domain.Admin;
+import com.stackroute.quizify.kafka.domain.Category;
+import com.stackroute.quizify.kafka.domain.Question;
+import com.stackroute.quizify.kafka.domain.Topic;
 import com.stackroute.quizify.questionmanager.exception.QuestionAlreadyExistsException;
 import com.stackroute.quizify.questionmanager.service.QuestionService;
 import org.apache.poi.ss.usermodel.Cell;
@@ -17,13 +17,11 @@ import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import static java.lang.ProcessBuilder.Redirect.appendTo;
 
 @Component
 public class FeedDataApplicationListener implements ApplicationListener<ContextRefreshedEvent>

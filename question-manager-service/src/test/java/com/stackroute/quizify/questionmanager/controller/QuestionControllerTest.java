@@ -1,10 +1,7 @@
 package com.stackroute.quizify.questionmanager.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.stackroute.quizify.questionmanager.domain.Admin;
-import com.stackroute.quizify.questionmanager.domain.Category;
-import com.stackroute.quizify.questionmanager.domain.Question;
-import com.stackroute.quizify.questionmanager.domain.Topic;
+import com.stackroute.quizify.kafka.domain.*;
 import com.stackroute.quizify.questionmanager.exception.NoQuestionFoundException;
 import com.stackroute.quizify.questionmanager.exception.QuestionAlreadyExistsException;
 import com.stackroute.quizify.questionmanager.exception.QuestionDoesNotExistException;

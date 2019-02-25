@@ -1,6 +1,6 @@
 package com.stackroute.quizify.questionmanager.controller;
 
-import com.stackroute.quizify.questionmanager.domain.Question;
+import com.stackroute.quizify.kafka.domain.Question;
 import com.stackroute.quizify.questionmanager.exception.NoQuestionFoundException;
 import com.stackroute.quizify.questionmanager.exception.QuestionAlreadyExistsException;
 import com.stackroute.quizify.questionmanager.exception.QuestionDoesNotExistException;

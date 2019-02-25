@@ -1,13 +1,10 @@
 package com.stackroute.quizify.questionmanager.service;
 
-import com.stackroute.quizify.questionmanager.domain.Admin;
-import com.stackroute.quizify.questionmanager.domain.Category;
-import com.stackroute.quizify.questionmanager.domain.Question;
-import com.stackroute.quizify.questionmanager.domain.Topic;
+import com.stackroute.quizify.kafka.Producer;
+import com.stackroute.quizify.kafka.domain.*;
 import com.stackroute.quizify.questionmanager.exception.NoQuestionFoundException;
 import com.stackroute.quizify.questionmanager.exception.QuestionAlreadyExistsException;
 import com.stackroute.quizify.questionmanager.exception.QuestionDoesNotExistException;
-import com.stackroute.quizify.questionmanager.kafka.Producer;
 import com.stackroute.quizify.questionmanager.repository.QuestionRepository;
 import org.junit.After;
 import org.junit.Before;

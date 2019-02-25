@@ -1,17 +1,13 @@
 package com.stackroute.quizify.questionmanager.service;
 
-import com.stackroute.quizify.questionmanager.config.KafkaProducerConfig;
-import com.stackroute.quizify.questionmanager.domain.Question;
+import com.stackroute.quizify.kafka.Producer;
+
+import com.stackroute.quizify.kafka.domain.Question;
 import com.stackroute.quizify.questionmanager.exception.NoQuestionFoundException;
 import com.stackroute.quizify.questionmanager.exception.QuestionAlreadyExistsException;
 import com.stackroute.quizify.questionmanager.exception.QuestionDoesNotExistException;
-import com.stackroute.quizify.questionmanager.kafka.Producer;
 import com.stackroute.quizify.questionmanager.repository.QuestionRepository;
-import org.apache.kafka.clients.producer.KafkaProducer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

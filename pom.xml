@@ -30,7 +30,9 @@
         <module>zuul-gatewayservice</module>
         <module>config-server</module>
 	    <module>question-manager-service</module>
-        <module>game-manager</module>
+        <module>game-manager-service</module>
+        <module>search-service</module>
+        <module>user-registration-service</module>
     </modules>
     <dependencies>
         <dependency>

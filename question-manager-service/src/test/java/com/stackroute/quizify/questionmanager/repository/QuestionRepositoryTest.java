@@ -1,9 +1,6 @@
 package com.stackroute.quizify.questionmanager.repository;
 
-import com.stackroute.quizify.questionmanager.domain.Admin;
-import com.stackroute.quizify.questionmanager.domain.Category;
-import com.stackroute.quizify.questionmanager.domain.Question;
-import com.stackroute.quizify.questionmanager.domain.Topic;
+import com.stackroute.quizify.kafka.domain.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

@@ -3,7 +3,7 @@ package com.stackroute.quizify.questionmanager;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.context.annotation.ComponentScan;
 
 /*
  * For a @SpringBootApplication to be discovery-aware, we have to include the annotation "@EnableDiscoveryClient".
@@ -15,6 +15,7 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
  */
 @EnableDiscoveryClient
 @SpringBootApplication
+@ComponentScan(basePackages = "com.stackroute.quizify")
 public class QuestionManagerApplication {
 
     public static void main(String[] args) {
