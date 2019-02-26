@@ -21,6 +21,17 @@ services:
     container_name: mongo
     network_mode: host
 
+  neo4j:
+    image: neo4j
+    ports:
+      - 7474:7474
+      - 7687:7687
+    expose:
+      - 7474
+      - 7687
+    container_name: neo4j
+    network_mode: host
+
   zookeeper:
     container_name: zookeeper
     image: wurstmeister/zookeeper
@@ -192,6 +203,23 @@ services:
       - 8095:8095
     expose:
       - 8095
+
+  recommendation-service:
+    image: recommendation-service
+    build: recommendation-service/
+    restart: always
+    network_mode: host
+    depends_on:
+      - zookeeper
+      - kafka
+      - neo4j
+      - eurekaserver
+      - configserver
+      - apigateway
+    ports:
+      - 8104:8104
+    expose:
+      - 8104
 
 #  quizify-front-end:
 #    image: quizify-front-end
